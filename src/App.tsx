@@ -1,10 +1,12 @@
-function App() {
+import Calculator from './containers/Calculator/Calculator';
+
+const App = () => {
 
   return (
     <>
-      <div>Hello world</div>
+      <Calculator />
     </>
   );
-}
+};
 
 export default App;
