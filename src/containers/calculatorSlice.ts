@@ -20,7 +20,11 @@ export const calculatorSlice = createSlice({
       state.stringResult += action.payload;
     },
     result: (state) => {
-      state.stringResult = eval(state.stringResult);
+      try {
+        state.stringResult = eval(state.stringResult);
+      } catch {
+        state.stringResult = '';
+      }
     }
   }
 });

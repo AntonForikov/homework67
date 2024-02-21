@@ -11,7 +11,7 @@ const Calculator = () => {
 
 
   return (
-    <div className='w-50 d-flex flex-column'>
+    <div className='w-25 d-flex flex-column'>
       <div
         style={{
           display: "flex",
@@ -36,7 +36,7 @@ const Calculator = () => {
             return <CalcButton
               key={value}
               value={value}
-              flexBasic='23'
+              flexBasic='22'
               equal
               onClick={() => dispatch(result())}
             />;
@@ -44,7 +44,7 @@ const Calculator = () => {
           return <CalcButton
             key={value}
             value={value}
-            flexBasic='23'
+            flexBasic='22'
             onClick={() => dispatch(inputStr(value))}/>;
         })}
       </div>
