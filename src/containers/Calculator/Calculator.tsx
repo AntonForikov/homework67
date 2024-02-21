@@ -1,18 +1,53 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../app/store';
-import {add, decrement, increment, subtract} from '../counterSlice';
+import {inputStr, reset, result} from '../calculatorSlice';
+import CalcButton from '../../components/CalcButton/CalcButton';
 
 const Calculator = () => {
-  const calcValue = useSelector((state: RootState) => state.counter.value);
+  const calcValue = useSelector((state: RootState) => state.counter.stringResult);
   const dispatch = useDispatch();
 
+  const calcButtonNums = ['1', '2', '3', '+', '4', '5', '6', '-', '7', '8', '9','*', '0', '.', '=', '/'];
+
+
   return (
-    <div>
-      <h1>{calcValue}</h1>
-      <button type='button' onClick={() => dispatch(increment())}>Increment</button>
-      <button type='button' onClick={() => dispatch(decrement())}>Decrement</button>
-      <button type='button' onClick={() => dispatch(add(5))}>Add 5</button>
-      <button type='button' onClick={() => dispatch(subtract(5))}>Subtract 5</button>
+    <div className='w-50 d-flex flex-column'>
+      <div
+        style={{
+          display: "flex",
+          width: '100%',
+          height: '100px',
+          border: '2px solid black',
+          alignItems: 'end',
+          justifyContent: 'end'
+        }}
+      >
+        <h1>{calcValue}</h1>
+      </div>
+      <div className='d-flex flex-wrap gap-3 justify-content-between mt-3'>
+        <CalcButton
+          value={'C'}
+          flexBasic='100'
+          onClick={() => dispatch(reset(''))}
+        />
+
+        {calcButtonNums.map(value => {
+          if (value === '=') {
+            return <CalcButton
+              key={value}
+              value={value}
+              flexBasic='23'
+              equal
+              onClick={() => dispatch(result())}
+            />;
+          }
+          return <CalcButton
+            key={value}
+            value={value}
+            flexBasic='23'
+            onClick={() => dispatch(inputStr(value))}/>;
+        })}
+      </div>
     </div>
   );
 };
